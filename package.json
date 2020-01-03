@@ -1,0 +1,25 @@
+{
+  "name": "discord-tokens-checker",
+  "version": "1.0.0",
+  "description": "A discord tokens checker that check the working tokens from a text file.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murtajaziad/discord-tokens-checker.git"
+  },
+  "keywords": [
+    "d.js",
+    "tokens checker",
+    "tokens validator",
+    "discordjs",
+    "discord"
+  ],
+  "author": "Murtaja Ziad",
+  "bugs": {
+    "url": "https://github.com/murtajaziad/discord-tokens-checker/issues"
+  },
+  "homepage": "https://github.com/murtajaziad/discord-tokens-checker#readme"
+}
