@@ -1,27 +1,28 @@
-const { Client } = require("discord.js"),
-  fs = require("fs"),
-  readline = require("readline");
+import { Client } from "discord.js";
+import { readFileSync } from "fs";
 
 class Checker {
-  constructor(tokensFilePath) {
-    this.tokensFilePath = tokensFilePath;
-  }
+    constructor(tokensFilePath = new String()) {
+        this.tokensFilePath = tokensFilePath;
+    }
 
-  async start() {
-    const readInterface = await readline.createInterface({
-      input: fs.createReadStream(this.tokensFilePath),
-      output: process.stdout
-    });
+    async start() {
+        if (!this.tokensFilePath) throw `You must declare Checker class before using this method !`;
 
-    readInterface.on("line", async token => {
-      let client = new Client();
-      try {
-        await client.login(token);
-        await console.log(`Working token: ${token}`);
-      } catch (err) {
-        if (err.message == "Incorrect login details were provided.")
-          throw new Error(`Incorrect token: ${token}`);
-      }
-    });
-  }
+        try {
+            const tokens = readFileSync(this.tokensFilePath, {encoding: "utf-8"}).split(/ /);
+            tokens.forEach((token) => {
+                const client = new Client()
+
+                client.login(token)
+                .then((_) => { console.log(`Working token: ${token}`) })
+                .catch((_) => { undefined });
+
+                client.destroy();
+            });
+
+        } catch(_) {
+            throw `Invalid path was provided: ${this.tokensFilePath}`;
+        }
+    }
 }
